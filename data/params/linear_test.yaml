@@ -1,0 +1,65 @@
+
+num_inputs: 4
+input_type: "beat"
+
+input_sine_bias: 0.5
+sd_input_sine_bias: 0.1
+input_sine_f: 0.5
+sd_input_sine_f: 0.1
+input_sine_phase: 0
+sd_input_sine_phase: 4
+
+input_step_t_on: 0
+sd_input_step_t_on: 4
+input_step_t_off: 5
+sd_input_step_t_off: 4
+
+input_beat_n_on: 2
+sd_input_beat_n_on: 4
+input_beat_n_off: 2
+sd_input_beat_n_off: 4
+input_beat_phase: 0
+sd_input_beat_phase: 4
+
+input_random_p_on: 0.5
+sd_input_random_p_on: 0.1
+
+##############################################
+
+num_layers: 5
+num_neurons: 8
+inter_bias: 0.5
+sd_inter_bias: 0.0
+inter_act: "Sigmoid"
+inter_p_inhib: 0.2
+inter_weight: 0.6
+sd_inter_weight: 0.2
+inter_delay: 1
+sd_inter_delay: 2
+inter_synapse_density: 0.5
+
+num_feedforward: 3
+ff_synapse_density: 0.25
+ff_bias: 0.5
+sd_ff_bias: 0.0
+ff_act: "ReLU"
+ff_p_inhib: 0.0
+ff_weight: 0.3
+sd_ff_weight: 0.2
+
+num_feedback: 3
+fb_synapse_density: 0.5
+fb_bias: 0.5
+sd_fb_bias: 0.0
+fb_act: "ReLU"
+fb_p_inhib: 0.75
+fb_weight: 0.3
+sd_fb_weight: 0.3
+
+num_outputs: 5
+output_bias: 0.4
+sd_output_bias: 0.1
+output_act: "Tanh"
+output_p_inhib: 0.2
+output_weight: 0.4
+sd_output_weight: 0.1

@@ -1,0 +1,1895 @@
+{
+   "_type": "Circuit1",
+   "neurons": [
+      {
+         "_type": "InputNeuron1",
+         "ind": 0,
+         "synapses": {
+            "pre": [],
+            "post": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 0,
+                  "post": 4,
+                  "weight": 0.23922863323138943,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 0,
+                  "post": 5,
+                  "weight": 0.2826842245490717,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 0,
+                  "post": 7,
+                  "weight": 0.4895457639455917,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ]
+         },
+         "bias": 0.5,
+         "act": {
+            "act_fn": "I",
+            "params": {}
+         },
+         "inhib": false,
+         "type": "Input",
+         "layer": "Input",
+         "signal_fn": "step",
+         "signal_params": {
+            "t_on": 1,
+            "t_off": 4
+         }
+      },
+      {
+         "_type": "InputNeuron1",
+         "ind": 1,
+         "synapses": {
+            "pre": [],
+            "post": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 1,
+                  "post": 6,
+                  "weight": 0.8959332671955742,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 1,
+                  "post": 7,
+                  "weight": 0.7606858900847044,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ]
+         },
+         "bias": 0.5,
+         "act": {
+            "act_fn": "I",
+            "params": {}
+         },
+         "inhib": false,
+         "type": "Input",
+         "layer": "Input",
+         "signal_fn": "step",
+         "signal_params": {
+            "t_on": -1,
+            "t_off": 4
+         }
+      },
+      {
+         "_type": "InputNeuron1",
+         "ind": 2,
+         "synapses": {
+            "pre": [],
+            "post": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 2,
+                  "post": 4,
+                  "weight": 0.516242125162557,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 2,
+                  "post": 6,
+                  "weight": 0.6230387428823264,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 2,
+                  "post": 8,
+                  "weight": 0.6774370645575573,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ]
+         },
+         "bias": 0.5,
+         "act": {
+            "act_fn": "I",
+            "params": {}
+         },
+         "inhib": false,
+         "type": "Input",
+         "layer": "Input",
+         "signal_fn": "step",
+         "signal_params": {
+            "t_on": -1,
+            "t_off": 5
+         }
+      },
+      {
+         "_type": "InputNeuron1",
+         "ind": 3,
+         "synapses": {
+            "pre": [],
+            "post": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 3,
+                  "post": 4,
+                  "weight": 0.852575079042829,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 3,
+                  "post": 5,
+                  "weight": 0.33147248119050443,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 3,
+                  "post": 6,
+                  "weight": 0.678531548844671,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 3,
+                  "post": 7,
+                  "weight": 0.7750946888678962,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 3,
+                  "post": 8,
+                  "weight": 0.49297645475637186,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ]
+         },
+         "bias": 0.5,
+         "act": {
+            "act_fn": "I",
+            "params": {}
+         },
+         "inhib": false,
+         "type": "Input",
+         "layer": "Input",
+         "signal_fn": "step",
+         "signal_params": {
+            "t_on": -1,
+            "t_off": 5
+         }
+      },
+      {
+         "_type": "Neuron1",
+         "ind": 4,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 0,
+                  "post": 4,
+                  "weight": 0.23922863323138943,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 2,
+                  "post": 4,
+                  "weight": 0.516242125162557,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 3,
+                  "post": 4,
+                  "weight": 0.852575079042829,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 19,
+                  "post": 4,
+                  "weight": 0.33806437830785047,
+                  "weight_sign": -1,
+                  "delay": 0
+               }
+            ],
+            "post": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 4,
+                  "post": 11,
+                  "weight": 0.23130744802123387,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 4,
+                  "post": 17,
+                  "weight": 0.44776540065521675,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ]
+         },
+         "bias": 0.5246546627829347,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": false,
+         "type": "",
+         "layer": "0"
+      },
+      {
+         "_type": "Neuron1",
+         "ind": 5,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 0,
+                  "post": 5,
+                  "weight": 0.2826842245490717,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 3,
+                  "post": 5,
+                  "weight": 0.33147248119050443,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ],
+            "post": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 5,
+                  "post": 10,
+                  "weight": 0.5091098923036171,
+                  "weight_sign": -1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 5,
+                  "post": 12,
+                  "weight": 0.5376844679697799,
+                  "weight_sign": -1,
+                  "delay": 0
+               }
+            ]
+         },
+         "bias": 0.40143418518461454,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": true,
+         "type": "",
+         "layer": "0"
+      },
+      {
+         "_type": "Neuron1",
+         "ind": 6,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 1,
+                  "post": 6,
+                  "weight": 0.8959332671955742,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 2,
+                  "post": 6,
+                  "weight": 0.6230387428823264,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 3,
+                  "post": 6,
+                  "weight": 0.678531548844671,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ],
+            "post": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 6,
+                  "post": 13,
+                  "weight": 0.6639593232729349,
+                  "weight_sign": -1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 6,
+                  "post": 18,
+                  "weight": 0.5675933457119378,
+                  "weight_sign": -1,
+                  "delay": 0
+               }
+            ]
+         },
+         "bias": 0.5119279601273897,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": true,
+         "type": "",
+         "layer": "0"
+      },
+      {
+         "_type": "Neuron1",
+         "ind": 7,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 0,
+                  "post": 7,
+                  "weight": 0.4895457639455917,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 1,
+                  "post": 7,
+                  "weight": 0.7606858900847044,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 3,
+                  "post": 7,
+                  "weight": 0.7750946888678962,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ],
+            "post": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 7,
+                  "post": 11,
+                  "weight": 0.3823777894469936,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 7,
+                  "post": 13,
+                  "weight": 0.8531613614743963,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 7,
+                  "post": 14,
+                  "weight": 0.613354494750553,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ]
+         },
+         "bias": 0.37544241548841845,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": false,
+         "type": "",
+         "layer": "0"
+      },
+      {
+         "_type": "Neuron1",
+         "ind": 8,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 2,
+                  "post": 8,
+                  "weight": 0.6774370645575573,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 3,
+                  "post": 8,
+                  "weight": 0.49297645475637186,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 18,
+                  "post": 8,
+                  "weight": 0.6291158915659967,
+                  "weight_sign": -1,
+                  "delay": 0
+               }
+            ],
+            "post": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 8,
+                  "post": 10,
+                  "weight": 0.6667043347782564,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 8,
+                  "post": 11,
+                  "weight": 0.2754237258106593,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 8,
+                  "post": 15,
+                  "weight": 0.4658154977584134,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 8,
+                  "post": 16,
+                  "weight": 0.46835161361582306,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ]
+         },
+         "bias": 0.3211201715618837,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": false,
+         "type": "",
+         "layer": "0"
+      },
+      {
+         "_type": "Neuron1",
+         "ind": 9,
+         "synapses": {
+            "pre": [],
+            "post": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 9,
+                  "post": 20,
+                  "weight": 0.2781422852317283,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 9,
+                  "post": 21,
+                  "weight": 0.4283361719978775,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 9,
+                  "post": 22,
+                  "weight": 0.2578724115234243,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 9,
+                  "post": 23,
+                  "weight": 0.3089613737814327,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 9,
+                  "post": 24,
+                  "weight": 0.5153394701374037,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ]
+         },
+         "bias": 0.33306271661832654,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": false,
+         "type": "",
+         "layer": "1"
+      },
+      {
+         "_type": "Neuron1",
+         "ind": 10,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 5,
+                  "post": 10,
+                  "weight": 0.5091098923036171,
+                  "weight_sign": -1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 8,
+                  "post": 10,
+                  "weight": 0.6667043347782564,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ],
+            "post": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 10,
+                  "post": 20,
+                  "weight": 0.23540649643369502,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 10,
+                  "post": 21,
+                  "weight": 0.46269863383989934,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 10,
+                  "post": 22,
+                  "weight": 0.4394414837023437,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 10,
+                  "post": 23,
+                  "weight": 0.4059332482713689,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 10,
+                  "post": 24,
+                  "weight": 0.39646649981472654,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ]
+         },
+         "bias": 0.4381495951397357,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": false,
+         "type": "",
+         "layer": "1"
+      },
+      {
+         "_type": "Neuron1",
+         "ind": 11,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 4,
+                  "post": 11,
+                  "weight": 0.23130744802123387,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 7,
+                  "post": 11,
+                  "weight": 0.3823777894469936,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 8,
+                  "post": 11,
+                  "weight": 0.2754237258106593,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 15,
+                  "post": 11,
+                  "weight": 0.5547881715159038,
+                  "weight_sign": -1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 16,
+                  "post": 11,
+                  "weight": 0.38158973018202247,
+                  "weight_sign": -1,
+                  "delay": 0
+               }
+            ],
+            "post": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 11,
+                  "post": 20,
+                  "weight": 0.3597965222614308,
+                  "weight_sign": -1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 11,
+                  "post": 21,
+                  "weight": 0.2818322184857689,
+                  "weight_sign": -1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 11,
+                  "post": 22,
+                  "weight": 0.43936701865551125,
+                  "weight_sign": -1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 11,
+                  "post": 23,
+                  "weight": 0.33385456805059727,
+                  "weight_sign": -1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 11,
+                  "post": 24,
+                  "weight": 0.3366560942631406,
+                  "weight_sign": -1,
+                  "delay": 0
+               }
+            ]
+         },
+         "bias": 0.6151509210638444,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": true,
+         "type": "",
+         "layer": "1"
+      },
+      {
+         "_type": "Neuron1",
+         "ind": 12,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 5,
+                  "post": 12,
+                  "weight": 0.5376844679697799,
+                  "weight_sign": -1,
+                  "delay": 0
+               }
+            ],
+            "post": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 12,
+                  "post": 19,
+                  "weight": 0.40093410808339913,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 12,
+                  "post": 20,
+                  "weight": 0.4427319260819468,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 12,
+                  "post": 21,
+                  "weight": 0.4216144861666906,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 12,
+                  "post": 22,
+                  "weight": 0.3212615582016992,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 12,
+                  "post": 23,
+                  "weight": 0.4885252341410251,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 12,
+                  "post": 24,
+                  "weight": 0.5772708641465394,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ]
+         },
+         "bias": 0.4159700286517314,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": false,
+         "type": "",
+         "layer": "1"
+      },
+      {
+         "_type": "Neuron1",
+         "ind": 13,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 6,
+                  "post": 13,
+                  "weight": 0.6639593232729349,
+                  "weight_sign": -1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 7,
+                  "post": 13,
+                  "weight": 0.8531613614743963,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 15,
+                  "post": 13,
+                  "weight": 0.39938318122247446,
+                  "weight_sign": -1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 16,
+                  "post": 13,
+                  "weight": 0.562617864429866,
+                  "weight_sign": -1,
+                  "delay": 0
+               }
+            ],
+            "post": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 13,
+                  "post": 20,
+                  "weight": 0.43039966163546584,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 13,
+                  "post": 21,
+                  "weight": 0.38990339275945524,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 13,
+                  "post": 22,
+                  "weight": 0.4293038020355143,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 13,
+                  "post": 23,
+                  "weight": 0.44317926263099283,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 13,
+                  "post": 24,
+                  "weight": 0.496938436429201,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ]
+         },
+         "bias": 0.4772267860162877,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": false,
+         "type": "",
+         "layer": "1"
+      },
+      {
+         "_type": "Neuron1",
+         "ind": 14,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 7,
+                  "post": 14,
+                  "weight": 0.613354494750553,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ],
+            "post": []
+         },
+         "bias": 0.33759978366661814,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": true,
+         "type": "Feedforward",
+         "layer": "Special"
+      },
+      {
+         "_type": "Neuron1",
+         "ind": 15,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 8,
+                  "post": 15,
+                  "weight": 0.4658154977584134,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ],
+            "post": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 15,
+                  "post": 11,
+                  "weight": 0.5547881715159038,
+                  "weight_sign": -1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 15,
+                  "post": 13,
+                  "weight": 0.39938318122247446,
+                  "weight_sign": -1,
+                  "delay": 0
+               }
+            ]
+         },
+         "bias": 0.4235961971697992,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": true,
+         "type": "Feedforward",
+         "layer": "Special"
+      },
+      {
+         "_type": "Neuron1",
+         "ind": 16,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 8,
+                  "post": 16,
+                  "weight": 0.46835161361582306,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ],
+            "post": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 16,
+                  "post": 11,
+                  "weight": 0.38158973018202247,
+                  "weight_sign": -1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 16,
+                  "post": 13,
+                  "weight": 0.562617864429866,
+                  "weight_sign": -1,
+                  "delay": 0
+               }
+            ]
+         },
+         "bias": 0.3734150595186328,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": true,
+         "type": "Feedforward",
+         "layer": "Special"
+      },
+      {
+         "_type": "Neuron1",
+         "ind": 17,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 4,
+                  "post": 17,
+                  "weight": 0.44776540065521675,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ],
+            "post": []
+         },
+         "bias": 0.3385657145303562,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": true,
+         "type": "Feedback",
+         "layer": "Special"
+      },
+      {
+         "_type": "Neuron1",
+         "ind": 18,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 6,
+                  "post": 18,
+                  "weight": 0.5675933457119378,
+                  "weight_sign": -1,
+                  "delay": 0
+               }
+            ],
+            "post": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 18,
+                  "post": 8,
+                  "weight": 0.6291158915659967,
+                  "weight_sign": -1,
+                  "delay": 0
+               }
+            ]
+         },
+         "bias": 0.44777156617086106,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": true,
+         "type": "Feedback",
+         "layer": "Special"
+      },
+      {
+         "_type": "Neuron1",
+         "ind": 19,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 12,
+                  "post": 19,
+                  "weight": 0.40093410808339913,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ],
+            "post": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 19,
+                  "post": 4,
+                  "weight": 0.33806437830785047,
+                  "weight_sign": -1,
+                  "delay": 0
+               }
+            ]
+         },
+         "bias": 0.2451026647185426,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": true,
+         "type": "Feedback",
+         "layer": "Special"
+      },
+      {
+         "_type": "OutputNeuron1",
+         "ind": 20,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 9,
+                  "post": 20,
+                  "weight": 0.2781422852317283,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 10,
+                  "post": 20,
+                  "weight": 0.23540649643369502,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 11,
+                  "post": 20,
+                  "weight": 0.3597965222614308,
+                  "weight_sign": -1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 12,
+                  "post": 20,
+                  "weight": 0.4427319260819468,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 13,
+                  "post": 20,
+                  "weight": 0.43039966163546584,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ],
+            "post": []
+         },
+         "bias": 0.40001321303572707,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": false,
+         "type": "Output",
+         "layer": "Output"
+      },
+      {
+         "_type": "OutputNeuron1",
+         "ind": 21,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 9,
+                  "post": 21,
+                  "weight": 0.4283361719978775,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 10,
+                  "post": 21,
+                  "weight": 0.46269863383989934,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 11,
+                  "post": 21,
+                  "weight": 0.2818322184857689,
+                  "weight_sign": -1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 12,
+                  "post": 21,
+                  "weight": 0.4216144861666906,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 13,
+                  "post": 21,
+                  "weight": 0.38990339275945524,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ],
+            "post": []
+         },
+         "bias": 0.3708415653833753,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": false,
+         "type": "Output",
+         "layer": "Output"
+      },
+      {
+         "_type": "OutputNeuron1",
+         "ind": 22,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 9,
+                  "post": 22,
+                  "weight": 0.2578724115234243,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 10,
+                  "post": 22,
+                  "weight": 0.4394414837023437,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 11,
+                  "post": 22,
+                  "weight": 0.43936701865551125,
+                  "weight_sign": -1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 12,
+                  "post": 22,
+                  "weight": 0.3212615582016992,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 13,
+                  "post": 22,
+                  "weight": 0.4293038020355143,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ],
+            "post": []
+         },
+         "bias": 0.5192266427791465,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": false,
+         "type": "Output",
+         "layer": "Output"
+      },
+      {
+         "_type": "OutputNeuron1",
+         "ind": 23,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 9,
+                  "post": 23,
+                  "weight": 0.3089613737814327,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 10,
+                  "post": 23,
+                  "weight": 0.4059332482713689,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 11,
+                  "post": 23,
+                  "weight": 0.33385456805059727,
+                  "weight_sign": -1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 12,
+                  "post": 23,
+                  "weight": 0.4885252341410251,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 13,
+                  "post": 23,
+                  "weight": 0.44317926263099283,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ],
+            "post": []
+         },
+         "bias": 0.37445999070668073,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": false,
+         "type": "Output",
+         "layer": "Output"
+      },
+      {
+         "_type": "OutputNeuron1",
+         "ind": 24,
+         "synapses": {
+            "pre": [
+               {
+                  "_type": "Synapse1",
+                  "pre": 9,
+                  "post": 24,
+                  "weight": 0.5153394701374037,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 10,
+                  "post": 24,
+                  "weight": 0.39646649981472654,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 11,
+                  "post": 24,
+                  "weight": 0.3366560942631406,
+                  "weight_sign": -1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 12,
+                  "post": 24,
+                  "weight": 0.5772708641465394,
+                  "weight_sign": 1,
+                  "delay": 0
+               },
+               {
+                  "_type": "Synapse1",
+                  "pre": 13,
+                  "post": 24,
+                  "weight": 0.496938436429201,
+                  "weight_sign": 1,
+                  "delay": 0
+               }
+            ],
+            "post": []
+         },
+         "bias": 0.4519106956842594,
+         "act": {
+            "act_fn": null,
+            "params": {}
+         },
+         "inhib": false,
+         "type": "Output",
+         "layer": "Output"
+      }
+   ],
+   "layers": {
+      "Default": [],
+      "Input": [
+         0,
+         1,
+         2,
+         3
+      ],
+      "0": [
+         4,
+         5,
+         6,
+         7,
+         8
+      ],
+      "1": [
+         9,
+         10,
+         11,
+         12,
+         13
+      ],
+      "Special": [
+         14,
+         15,
+         16,
+         17,
+         18,
+         19
+      ],
+      "Output": [
+         20,
+         21,
+         22,
+         23,
+         24
+      ]
+   },
+   "synapses": [
+      {
+         "_type": "Synapse1",
+         "pre": 0,
+         "post": 4,
+         "weight": 0.23922863323138943,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 2,
+         "post": 4,
+         "weight": 0.516242125162557,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 3,
+         "post": 4,
+         "weight": 0.852575079042829,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 19,
+         "post": 4,
+         "weight": 0.33806437830785047,
+         "weight_sign": -1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 0,
+         "post": 5,
+         "weight": 0.2826842245490717,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 3,
+         "post": 5,
+         "weight": 0.33147248119050443,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 1,
+         "post": 6,
+         "weight": 0.8959332671955742,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 2,
+         "post": 6,
+         "weight": 0.6230387428823264,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 3,
+         "post": 6,
+         "weight": 0.678531548844671,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 0,
+         "post": 7,
+         "weight": 0.4895457639455917,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 1,
+         "post": 7,
+         "weight": 0.7606858900847044,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 3,
+         "post": 7,
+         "weight": 0.7750946888678962,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 2,
+         "post": 8,
+         "weight": 0.6774370645575573,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 3,
+         "post": 8,
+         "weight": 0.49297645475637186,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 18,
+         "post": 8,
+         "weight": 0.6291158915659967,
+         "weight_sign": -1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 5,
+         "post": 10,
+         "weight": 0.5091098923036171,
+         "weight_sign": -1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 8,
+         "post": 10,
+         "weight": 0.6667043347782564,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 4,
+         "post": 11,
+         "weight": 0.23130744802123387,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 7,
+         "post": 11,
+         "weight": 0.3823777894469936,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 8,
+         "post": 11,
+         "weight": 0.2754237258106593,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 15,
+         "post": 11,
+         "weight": 0.5547881715159038,
+         "weight_sign": -1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 16,
+         "post": 11,
+         "weight": 0.38158973018202247,
+         "weight_sign": -1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 5,
+         "post": 12,
+         "weight": 0.5376844679697799,
+         "weight_sign": -1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 6,
+         "post": 13,
+         "weight": 0.6639593232729349,
+         "weight_sign": -1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 7,
+         "post": 13,
+         "weight": 0.8531613614743963,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 15,
+         "post": 13,
+         "weight": 0.39938318122247446,
+         "weight_sign": -1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 16,
+         "post": 13,
+         "weight": 0.562617864429866,
+         "weight_sign": -1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 7,
+         "post": 14,
+         "weight": 0.613354494750553,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 8,
+         "post": 15,
+         "weight": 0.4658154977584134,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 8,
+         "post": 16,
+         "weight": 0.46835161361582306,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 4,
+         "post": 17,
+         "weight": 0.44776540065521675,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 6,
+         "post": 18,
+         "weight": 0.5675933457119378,
+         "weight_sign": -1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 12,
+         "post": 19,
+         "weight": 0.40093410808339913,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 9,
+         "post": 20,
+         "weight": 0.2781422852317283,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 10,
+         "post": 20,
+         "weight": 0.23540649643369502,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 11,
+         "post": 20,
+         "weight": 0.3597965222614308,
+         "weight_sign": -1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 12,
+         "post": 20,
+         "weight": 0.4427319260819468,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 13,
+         "post": 20,
+         "weight": 0.43039966163546584,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 9,
+         "post": 21,
+         "weight": 0.4283361719978775,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 10,
+         "post": 21,
+         "weight": 0.46269863383989934,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 11,
+         "post": 21,
+         "weight": 0.2818322184857689,
+         "weight_sign": -1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 12,
+         "post": 21,
+         "weight": 0.4216144861666906,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 13,
+         "post": 21,
+         "weight": 0.38990339275945524,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 9,
+         "post": 22,
+         "weight": 0.2578724115234243,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 10,
+         "post": 22,
+         "weight": 0.4394414837023437,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 11,
+         "post": 22,
+         "weight": 0.43936701865551125,
+         "weight_sign": -1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 12,
+         "post": 22,
+         "weight": 0.3212615582016992,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 13,
+         "post": 22,
+         "weight": 0.4293038020355143,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 9,
+         "post": 23,
+         "weight": 0.3089613737814327,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 10,
+         "post": 23,
+         "weight": 0.4059332482713689,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 11,
+         "post": 23,
+         "weight": 0.33385456805059727,
+         "weight_sign": -1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 12,
+         "post": 23,
+         "weight": 0.4885252341410251,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 13,
+         "post": 23,
+         "weight": 0.44317926263099283,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 9,
+         "post": 24,
+         "weight": 0.5153394701374037,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 10,
+         "post": 24,
+         "weight": 0.39646649981472654,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 11,
+         "post": 24,
+         "weight": 0.3366560942631406,
+         "weight_sign": -1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 12,
+         "post": 24,
+         "weight": 0.5772708641465394,
+         "weight_sign": 1,
+         "delay": 0
+      },
+      {
+         "_type": "Synapse1",
+         "pre": 13,
+         "post": 24,
+         "weight": 0.496938436429201,
+         "weight_sign": 1,
+         "delay": 0
+      }
+   ]
+}
