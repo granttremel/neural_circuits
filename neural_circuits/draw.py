@@ -140,17 +140,19 @@ def scalar_to_text_nb(scalars, minval = None, maxval = None, fg_color = 53, bg_c
     
     return outstrs
 
-def scalar_to_text_mid(scalars, center = None, rng = None, fg_color = 53, bg_color = 234,  effect = None):
+def scalar_to_text_mid(scalars, center = None, rng = None, fg_color = 53, bg_color = 234,  effect = None, same_color = False):
     
     bit_depth = 16
     
-    ifg, ibg = get_fgbg(fg_color, bg_color)
     bg, fg = get_fgbg(bg_color, fg_color)
+    if same_color:
+        ibg, ifg = get_fgbg(fg_color, bg_color)
+    else:
+        ibg, ifg = get_fgbg(bg_color, fg_color - 6)
     
     eff = ""
     if effect:
         eff += str(effect)
-    
     
     base_bit_depth = len(SCALE) - 1
     if not bit_depth % base_bit_depth == 0:
