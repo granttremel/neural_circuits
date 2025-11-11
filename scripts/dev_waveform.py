@@ -239,8 +239,8 @@ def test_alg(num_tests = 5, show_spectrum = False):
         
         f2,d2,ph2 = w2
         
-        # f2 = f1
-        d1 = d2 = .5
+        f2 = f1
+        d1 = d2 = .1
         
         w1 = f1, d1, ph1
         w2 = f2, d2, ph2

@@ -244,3 +244,33 @@ def show_ft_polar(real, imag, bit_depth = 16):
     for lbl,r in zip(lbl2s,sctxt2):
         print(marg.format(lbl), r)
     print()
+
+def unwrap_phase(phase_data):
+    
+    n = len(phase_data)
+    c = len(phase_data)//2
+    deltas = np.zeros(n)
+    
+    jump_thresh = np.pi/2
+    
+    jump_ct = 0
+    last_p = 0
+    last_dp = 0
+    for i in range(c, n):
+        p = phase_data[i]
+        dp = p - last_p
+        
+        if p*last_p < 0 and abs(dp) > jump_thresh and last_dp < jump_thresh:
+            if p>0:
+                jumpct += 1
+            elif p < 0:
+                jumpct -=1
+        
+        deltas[i] = jumpct*np.pi*2
+        
+        
+        
+        pass
+    
+    
+    pass
