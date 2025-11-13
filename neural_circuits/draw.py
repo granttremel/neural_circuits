@@ -96,10 +96,16 @@ def scalar_to_text_nb(scalars, minval = None, maxval = None, fg_color = 53, bg_c
         minval = min(scalars)
     if maxval is None:
         maxval = max(scalars)
+    
     rng = (maxval - minval)/1
     c = (minval+ maxval)/2
+    
     if rng == 0:
-        return [fg+bg+eff + SCALE[-1] + RESET]
+        c = max(maxval/2, 0.5)
+        rng = 0.5
+    
+    # if rng == 0:
+    #     return [fg+bg+eff + SCALE[-1] + RESET]
     
     for s in scalars:
         sv = int(nvals*((s - c)/rng)) + bit_depth // 2
@@ -201,6 +207,109 @@ def scalar_to_text_mid(scalars, center = None, rng = None, fg_color = 53, bg_col
         outstrs.append("".join(row))
         
     return outstrs
+
+def plot_scalar_hist(scalars, num_bins, bin_range,  bit_depth = 24, ruler = True, add_range = True, **kwargs):
+    
+    hist, edges = np.histogram(scalars, num_bins, bin_range)
+    
+    sctxt = scalar_to_text_nb(hist, min_val = 0, bit_depth = bit_depth, add_range = add_range, **kwargs)
+    
+    if ruler:
+        sctxt, _ = add_ruler(sctxt, edges[0], edges[-1], ticks = 0,  minor_ticks = 0)
+    
+    for r in sctxt:
+        print(r)
+    print()
+
+def add_ruler(sctxt, xmin, xmax, **kwargs):
+    if not xmin or not xmax:
+        return sctxt, []
+    
+    num_cols = sum(1 for s in sctxt[0] if s in SCALE)
+    ran = (xmax - xmin)
+    num_labels = kwargs.get("num_labels", 5)
+    ticks = kwargs.get("ticks", 5)
+    minor_ticks = kwargs.get("minor_ticks", num_cols)
+    lbl_delta = ran / (num_labels - 1)
+    if kwargs.get("fstr"):
+        fmtr = kwargs.get("fstr")
+    elif any(abs(x)>1e5 for x in [xmin, xmax]):
+        fmtr = "0.2e"
+    elif any(abs(x) > 0 and abs(x) < 1e-5 for x in [xmin, xmax, lbl_delta]):
+        fmtr = "0.2e"
+    elif all(int(x)==x for x in [xmin, xmax, lbl_delta]):
+        fmtr = ".0g"
+    else:
+        fmtr = "0.1f"
+    
+    ruler, dists = make_ruler(xmin, xmax, num_cols, num_labels = num_labels, ticks = ticks, minor_ticks = minor_ticks, formatter = fmtr)
+    sctxt.append(ruler)
+
+    return sctxt, dists
+
+def make_ruler(xmin, xmax, num_cols, num_labels = 5, ticks = 5, minor_ticks = 5, formatter = "0.2g"):
+    
+    xran = xmax - xmin
+    
+    num_labels = max(2, num_labels)
+    
+    if isinstance(formatter, str):
+        frmstr = formatter
+        formatter = lambda s: format(s, frmstr)
+    
+    label_dist_c = round(num_cols / (num_labels - 1))
+    if ticks < 1:
+        tick_dist_c = num_cols + 1
+    else:
+        tick_dist_c = round(num_cols / ticks / (num_labels - 1))
+    
+    if minor_ticks < 1:    
+        minor_tick_dist_c = num_cols + 1
+    else:
+        minor_tick_dist_c = max(1, round(num_cols / minor_ticks / max(1,ticks) / (num_labels - 1)))
+    
+    label_dist = xran * label_dist_c / num_cols
+    tick_dist = xran * tick_dist_c / num_cols
+    minor_tick_dist = xran * minor_tick_dist_c / num_cols
+    
+    bfr = ""
+    if tick_dist_c < 2 or minor_tick_dist_c < 2:
+        bfr = ""
+    
+    lbl = "╰"
+    rlbl = "╯"
+    tck = "╵"
+    mtck = "'"
+    
+    final_lbl = bfr + formatter(xmax) + rlbl
+    final_lbl_pos = num_cols - len(final_lbl)
+    
+    ruler = []
+    nc = 0
+    while nc < num_cols + 1:
+        
+        if nc == final_lbl_pos:
+            ruler.append(final_lbl)
+            break
+        elif nc%label_dist_c == 0:
+            labelpos = nc*xran/num_cols + xmin
+            labelstr = lbl + formatter(labelpos) + bfr
+            ruler.append(labelstr)
+            nc += len(labelstr)
+            continue
+        elif nc%tick_dist_c == 0:
+            ruler.append(tck)
+            nc+= 1
+            continue
+        elif nc%minor_tick_dist_c == 0:
+            ruler.append(mtck)
+            nc+= 1
+            continue
+        else:
+            ruler.append(" ")
+            nc += 1
+    
+    return "".join(ruler), (label_dist, tick_dist, minor_tick_dist)
 
 
 def quantize(data, bit_depth, maxval=None, minval=None, mid = False):
@@ -483,6 +592,108 @@ def plot_net_activity(circ:'Circuit0', max_t = -1):
         layerdata.append(sctxt[0])
         print(str(i), layerdata[i])
     
+def show_waveform(wf, bit_depth = 16, lbl = "", t_max = None, ruler = False):
+    
+    add_range = False
+    if bit_depth > 8:
+        add_range = True
+    
+    marg = "{:<6}" if lbl else "{}"
+    lbls = [lbl] + [""]*(bit_depth//8 - 1 + int(ruler))
+    
+    sctxt = scalar_to_text_nb(wf, bit_depth = bit_depth, add_range = add_range, fg_color = Colors.SPIKE, bg_color = 232)
+    
+    if ruler:
+        sctxt, _ = add_ruler(sctxt, xmin = 0, xmax = t_max, fstr = "0.2f", minor_ticks = 0)
+    
+    for lbl,r in zip(lbls,sctxt):
+        print(marg.format(lbl), r)
+    print()
+    
+def show_waveform_spectrum(wf, bit_depth = 16, polar = False, show_time = False, dt = None, t_max = None, ruler = False, **kwargs):
+    
+    ft = np.fft.fftshift(np.fft.fft(wf)) # f = 0 in center
+    if polar:
+        data1 = np.abs(ft)
+        data2 = np.angle(ft)
+    else:
+        data1 = np.real(ft)
+        data2 = np.imag(ft)
+    
+    if show_time:
+        show_waveform(wf, lbl = "Time", t_max = t_max, ruler = ruler)
+    
+    if polar:
+        show_spec_polar(data1, data2, bit_depth = bit_depth, dt = dt, ruler = ruler, **kwargs)
+    else:
+        show_spec_reim(data1, data2, bit_depth = bit_depth, dt =dt, ruler = ruler, **kwargs)
+
+def show_spec_reim(real, imag, bit_depth = 16, dt = None, ruler = False, **kwargs):
+    num_rows = bit_depth // 8
+
+    data1 = np.real(real)
+    data2 = np.imag(1j*imag)
+    minval1 = minval2 = min(min(real), min(imag))
+    maxval1 = maxval2 = max(max(real[:len(real)//2]), max(real[len(real)//2+1:]), max(imag))
+    c1 = 0
+    r1 = 2*max(maxval1, abs(minval1))
+    c2 = 0
+    r2 = 2*max(maxval2, abs(minval2))
+        
+    marg = "{:<6}"
+    
+    # sctxt1 = draw.scalar_to_text_nb(data1, bit_depth = bit_depth, add_range = add_range, minval = minval1, maxval = maxval1)
+    sctxt1 = scalar_to_text_mid(data1, center = c1, rng = r1)
+    lbl1s = ["Real"] + (num_rows - 1) * [" "]
+    
+    for lbl,r in zip(lbl1s,sctxt1):
+        print(marg.format(lbl), r)
+    
+    
+    # sctxt2 = draw.scalar_to_text_nb(data2, bit_depth = bit_depth, add_range = add_range, minval = minval2, maxval = maxval2)
+    sctxt2 = scalar_to_text_mid(data2, center = c2, rng = r2)
+    lbl2s = ["Imag"] + (num_rows - 1 + int(ruler)) * [" "]
+    
+    if ruler:
+        sctxt2,_ = add_ruler(sctxt2, -2/dt, 2/dt, fstr = "0.3f", minor_ticks = 0)
+    
+    for lbl,r in zip(lbl2s,sctxt2):
+        print(marg.format(lbl), r)
+    
+def show_spec_polar(mag, phase, bit_depth = 16, dt = None, ruler = False, **kwargs):
+    
+    num_rows = bit_depth // 8
+    lbl1 = "Mag"
+    lbl2 = "Arg"
+    
+    minval1 = 0
+    maxval1 = max(mag[:len(mag)//2])*1.1
+    
+    c2 = 0
+    r2 = 2*np.pi
+        
+    add_range = False
+    if bit_depth > 8:
+        add_range = True
+    
+    marg = "{:<6}"
+    
+    sctxt1 = scalar_to_text_nb(mag, bit_depth = bit_depth, add_range = add_range, minval = minval1, maxval = maxval1, fg_color = Colors.SPIKE, bg_color = 232)
+    lbl1s = [lbl1] + (num_rows - 1) * [" "]
+    
+    for lbl,r in zip(lbl1s,sctxt1):
+        print(marg.format(lbl), r)
+    print()
+    
+    sctxt2 = scalar_to_text_mid(phase, center = c2, rng = r2, fg_color = 56, bg_color = 232, same_color = True)
+    lbl2s = [lbl2] + (num_rows - 1 + int(ruler)) * [" "]
+    
+    if ruler:
+        sctxt2,_ = add_ruler(sctxt2, -2/dt, 2/dt, fstr = "0.0f", minor_ticks = 0)
+        
+    for lbl,r in zip(lbl2s,sctxt2):
+        print(marg.format(lbl), r)
+    print()
 
 def get_act_color(row_ind, spiking, inhib=False):
     if row_ind == 1:

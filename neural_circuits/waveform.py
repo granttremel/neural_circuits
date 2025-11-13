@@ -6,6 +6,320 @@ import numpy as np
 from . import draw
 
 
+class Waveform:
+    
+    _duty_res = 2**8
+    _t_spike = 0.001 # from a wiki table..
+    _t_refractory = 0.002 # from a figure on wiki lol
+    
+    def __init__(self, f, d, phi, A = 1.0, inh = False):
+        self.f = f
+        self.tp = 1/f if f!=0 else -1
+        
+        self._d_orig = d
+        self._d = int(d*self._duty_res)
+        
+        self.phi = phi
+        
+        self.A = A
+        self.inh = inh
+        
+        self._data = None
+        self._dt = None
+        self._tmax = None
+        
+        # self.min_seq = self.minimal_sequence()
+    
+    @property
+    def d(self):
+        return self._d / self._duty_res
+    
+    @property
+    def ds(self):
+        div = math.gcd(self._d, self._duty_res)
+        d_tot = self._duty_res // div
+        d_on = self._d // div
+        d_off = d_tot - d_on # max error of 1/cycle i guess..
+        return d_on, d_off, d_tot
+    
+    def get_data(self, dt, t_max):
+        
+        if self._dt == dt and self._tmax == t_max:
+            return self._data
+        else:
+            return None
+    
+    def cache_data(self, data, dt, t_max):
+        self._data = data
+        self._dt = dt
+        self._tmax = t_max
+    
+    def to_tuple(self):
+        return self.f, self.d, self.phi
+    
+    def minimal_sequence(self):
+        
+        d_on, d_off, d_tot = self.ds
+        
+        dt = self.tp / d_tot
+        t_max = dt * d_tot
+        
+        return self.make_step(dt, t_max)
+    
+    def make_step(self, dt, t_max):
+        
+        data = self.get_data(dt, t_max)
+        if data is not None:
+            return data
+        
+        ns = int(round(t_max / dt))
+        
+        num_cycles = int(round(t_max / self.tp))
+        d_on = self.d
+        
+        d_on = int(round(d_on / self.f / dt))
+        d_tot = int(round(ns / num_cycles))
+        
+        ph_d = self.phi / self.f / dt
+        
+        wf = np.zeros(ns)
+        
+        sgn = -1 if self.inh else 1
+        
+        for nt in range(ns):
+            if (nt - ph_d) % d_tot < d_on:
+                wf[nt] = sgn*self.A
+        
+        self.cache_data(data, dt, t_max)
+        
+        return wf
+
+    def validate(self):
+        f, d, phi = self._validate(self.f, self.d, self.phi, self._t_spike, self._t_refractory)
+        self.f = f
+        self.d = d
+        self.phi = phi
+    
+    @classmethod
+    def _validate(cls, f, d, phi, t_spike, t_refr):
+        
+        tp = 1/f
+        t_on = tp*d
+        t_off = tp*(1-d)
+        
+        if t_on < t_spike:
+            t_on = t_spike
+        
+        if t_off < t_refr:
+            t_off = t_refr
+        
+        f = 1/(t_on + t_off)
+        d = t_on / (t_on + t_off)
+        
+        return (f, d, phi)
+
+    def show(self, dt = None, t_max = None, bit_depth = 16, lbl = "", **kwargs):
+        data = self.make_step(dt, t_max)
+        self.show_data(data, bit_depth = bit_depth, lbl = lbl, t_max = t_max, add_ruler = True, **kwargs)
+        return data
+
+    @classmethod
+    def show_data(self, data, bit_depth = 16, lbl = "", t_max = None, add_ruler = False, **kwargs):
+        draw.show_waveform(data, bit_depth =bit_depth, lbl = lbl, t_max = t_max, ruler = add_ruler, **kwargs)
+
+    def show_spectrum(self, dt = None, t_max = None, bit_depth = 16, polar = True, show_time = False, **kwargs):
+        data = self.make_step(dt, t_max)
+        draw.show_waveform_spectrum(data, bit_depth = bit_depth, polar = polar, show_time = show_time, dt = dt, t_max = t_max, ruler = True, **kwargs)
+        return data
+
+    @classmethod
+    def show_data_spectrum(self, data, bit_depth =16, polar = True, show_time = False, **kwargs):
+        draw.show_waveform_spectrum(data, bit_depth = bit_depth, polar = polar, show_time = show_time, **kwargs)
+
+    def compare(self, other:'Waveform', dt = None, t_max = None):
+        
+        if not dt or not t_max:                
+            f1, d1, ph1, = self.to_tuple()
+            f2, d2, ph2 = other.to_tuple()
+            
+            ton1 = d1/f1
+            toff1 = (1-d1) / f1
+            
+            ton2 = d2/f2
+            toff2 = (1-d2) / f2
+            ns = 256
+            dt = min(ton1, ton2, toff1, toff2)
+            t_max = ns * dt
+        else:
+            ns = int(t_max / dt)
+        
+        
+        wfd1 = self.make_step(dt, t_max)
+        wfd2 = other.make_step(dt, t_max)
+        
+        A_fact = self.A + other.A
+        sc = self._compare(wfd1, wfd2, A_fact = A_fact)
+        
+        return sc, dt, t_max
+    
+    @classmethod
+    def _compare(cls, wfd1, wfd2, A_fact = 1.0):
+        # A1 = A2 = 1.0
+        ns = len(wfd1)
+        sc = 0
+        for ww1, ww2 in zip(wfd1, wfd2):
+            if ww1 and ww2 > 0.0:
+                sc += ww1 + ww2
+        sc /= ns
+        sc /= A_fact
+        
+        return sc
+
+    @classmethod
+    def integrate(cls, wfs, dt, t_max, thresh = 1.0, val_ts = False):
+        
+        all_wfd = []
+        for wf in wfs:
+            wfd = wf.make_step(dt, t_max)
+            all_wfd.append(wfd)
+            
+        return cls._integrate(*all_wfd, thresh = thresh, val_ts = val_ts)
+
+    @classmethod
+    def _integrate(cls, *wfds, thresh = 1.0, val_ts = False):
+        
+        num_data = len(wfds)
+        ns = len(wfds[0])
+        
+        res = 0
+        
+        all_sum = wfds[0]
+        for wfd in wfds[1:]:
+            all_sum = cls._sum_data(all_sum, wfd)
+        
+        for i in range(ns):
+            ssc = 0
+            for n in range(num_data):
+                ssc += wfds[n]
+            res += max(0.0, min(ssc, thresh))
+        
+        return res
+
+    def sum_data(self, other:'Waveform', dt, t_max, thresh = None):
+        wfd1 = self.make_step(dt, t_max)
+        wfd2 = other.make_step(dt, t_max)
+        return self._sum_data(wfd1, wfd2)
+    
+    @classmethod
+    def _sum_data(cls, wfd1, wfd2, thresh = None):
+        res = wfd1 + wfd2
+        if thresh:
+            res[res>thresh] =thresh
+        
+        return res
+    
+    @classmethod
+    def validate_min_time(cls, wfd, dt, min_t_on = None, min_t_off = None):
+        if not min_t_on:
+            min_t_on = cls._t_spike
+        if not min_t_off:
+            min_t_off = cls._t_refractory
+        
+        changed = False
+        started = False
+        
+        t_on = 0
+        t_off = 0
+        
+        wfd_val = wfd.copy()
+        
+        for i in range(len(wfd)):
+            d= wfd[i]
+            if d > 0:
+                if t_off:
+                    if t_off < min_t_off and started:
+                        changed = True
+                        wfd_val[i] = 0.0
+                        t_off += dt
+                        continue
+                    else:
+                        started = True
+                        t_off = 0
+                
+                t_on += dt
+            else:                
+                if t_on:
+                    if t_on < min_t_on and started:
+                        changed = True
+                        wfd_val[i] = wfd_val[i-1]
+                        t_on += dt
+                        continue
+                    else:
+                        started = True
+                        t_on = 0
+                        
+                t_off += dt
+        return wfd_val, changed
+    
+    def diff_data(self, other:'Waveform', dt, t_max, rect = False, thresh = None):
+        data1 = self.make_step(dt, t_max)
+        data2 = other.make_step(dt, t_max)
+        
+        res = data1-data2
+        
+        if rect:
+            res[res < 0] = 0
+        
+        if thresh:
+            res[res>thresh] = thresh
+        
+        return res
+    
+    @classmethod
+    def from_tuple(cls, tup):
+        return cls(*tup)
+
+    @classmethod
+    def extract(cls, wf, dt):
+        
+        ns = len(wf)
+        t_max = dt*ns
+        
+        ons = []
+        summ = 0
+        npks = 0
+        
+        vlast = 0
+        for i in range(ns):
+            v = wf[i]
+            summ += v
+            if v > 0:
+                npks += 1
+                if vlast == 0.0:
+                    ons.append(i)
+            vlast = v
+        
+        if not len(ons)<2:
+            return None
+        
+        dons = [on1 - on0 for on1, on0 in zip(ons[1:], ons[:-1])]
+        meandon = np.mean(dons)
+        if meandon ==0:
+            return None
+        f_avg = 1/np.mean(dons)/dt
+        
+        d_avg = npks / ns
+        
+        phis = [n/f_avg - ons[n]*dt for n in range(len(ons))]
+        phi_avg = -np.mean(phis)*f_avg
+        
+        return cls(f_avg, d_avg, phi_avg)
+
+    def __repr__(self):
+        wfstr ="f={:0.3f}, d={:0.3f}, ph={:0.3f}".format(*self.to_tuple())
+        return f"Waveform({wfstr})"
+
+
 
 
 def make_step_waveform(f, d_on, d_tot, ph, A=1.0, num_cycles = 1):

@@ -22,7 +22,7 @@ class NeuralState0:
     
     @property
     def is_spiking(self):
-        return bool(self.activation > self.bias)
+        return self.activation != 0.0
     
 class Synapse0:
     
@@ -121,7 +121,7 @@ class Neuron0:
 
     def _calc_state(self, t):
         
-        raw_act = 0
+        raw_act = self.bias
         
         for syn in self.synapses["pre"]:
             raw_act += syn.get_activation(t)
@@ -285,7 +285,7 @@ class InputNeuron0(Neuron0):
     
     def _random(self, t):
         seed = self.signal_params.get("seed")
-        return random.random()
+        return int(self.signal_params.get("p_on") > random.random())
     
     @classmethod
     def sinusoid(cls, freq, phase, bias, act_fn = "I"):
@@ -302,7 +302,7 @@ class InputNeuron0(Neuron0):
         ntot = n_on+n_off
         phase = phase % ntot
         signal_params = {"n_on":n_on,"n_off":n_off, "phase":phase}
-        return cls(signal_fn = "beat", bias = 0.5, act_fn = "I", signal_params = signal_params)
+        return cls(signal_fn = "beat", bias = 0.0, act_fn = "I", signal_params = signal_params)
         
     @classmethod
     def hill(cls, var, bias):
@@ -312,7 +312,7 @@ class InputNeuron0(Neuron0):
     def random(cls, p_on, seed = 129):
         seed = random.random()*1e14
         signal_params = {"p_on":p_on,"seed":seed}
-        return cls(signal_fn = "random", bias = 1-p_on, act_fn = "I", signal_params = signal_params)
+        return cls(signal_fn = "random", bias = 0, act_fn = "ReLU", signal_params = signal_params)
 
     def to_dict(self):
         ndict = super().to_dict()

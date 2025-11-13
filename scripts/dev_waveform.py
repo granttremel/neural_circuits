@@ -4,24 +4,24 @@ import math
 
 import numpy as np
 from tabulate import tabulate
-from neural_circuits import waveform
+from neural_circuits import waveform as wvf
 import random
 
 
 def make_waveform(f, d_on, d_tot, ph, **kwargs):
     
-    wf, dt = waveform.make_step_waveform(f, d_on, d_tot, ph, **kwargs)
+    wf, dt = wvf.make_step_waveform(f, d_on, d_tot, ph, **kwargs)
     
-    waveform.show_waveform(wf)
+    wvf.show_waveform(wf)
     
     return wf, dt
 
 
 def make_waveform2(f, d, ph, dt, t_max, **kwargs):
     
-    wf, dt = waveform.make_step_waveform2(f, d,  ph, dt, t_max, **kwargs)
+    wf, dt = wvf.make_step_waveform2(f, d,  ph, dt, t_max, **kwargs)
     
-    waveform.show_waveform(wf)
+    wvf.show_waveform(wf)
     
     return wf, dt
 
@@ -83,7 +83,7 @@ def test_numden(num_tests = 5):
         dt = 1/f/d_tot
         t_max = nc / f
         
-        num, den = waveform.get_duty(f, d_r) 
+        num, den = wvf.get_duty(f, d_r) 
         d_r2 = num/den
         print(f"d_on2: {num}, d_tot2: {den}, d_r2: {d_r2:0.3f}")
         
@@ -114,21 +114,21 @@ def test_compare_waveforms(num_tests =20):
         print(f"*** w2: f: {f2:0.3f}, d: {d2:0.3f}, ph: {ph2:0.3f} ***")
         print()
         
-        sc, dt, t_max = waveform.compare_waveforms(w1, w2)
+        sc, dt, t_max = wvf.compare_waveforms(w1, w2)
         ns = int(t_max / dt)
         
         print(f"ns: {ns}, dt: {dt:0.3f}, t_max: {t_max:0.3f}")
         print()
         
-        wf1, _ = waveform.make_step_waveform2(f1, d1, ph1, dt, t_max)
-        wf2, _ = waveform.make_step_waveform2(f2, d2, ph2, dt, t_max)
+        wf1, _ = wvf.make_step_waveform2(f1, d1, ph1, dt, t_max)
+        wf2, _ = wvf.make_step_waveform2(f2, d2, ph2, dt, t_max)
         
         print(len(wf1), len(wf2))
         print(sum(wf1), sum(wf2))
         
         print(f"Score = {sc:0.1%}")
-        waveform.show_waveform(wf1, bit_depth = 16)
-        waveform.show_waveform(wf2, bit_depth = 16)
+        wvf.show_waveform(wf1, bit_depth = 16)
+        wvf.show_waveform(wf2, bit_depth = 16)
         print()
     
 def test_fts(duty_tot = 4):
@@ -152,9 +152,9 @@ def test_fts(duty_tot = 4):
         print(f"duty={d:0.3f}")
         
         w = (f, d, ph)
-        wf,_ = waveform.make_step_waveform2(*w, dt, t_max)
+        wf,_ = wvf.make_step_waveform2(*w, dt, t_max)
         
-        waveform.show_ft(wf, polar=True, show_time = True)
+        wvf.show_ft(wf, polar=True, show_time = True)
         
 
 def test_ips(num_tests = 5):
@@ -174,7 +174,7 @@ def test_ips(num_tests = 5):
     dt = min(d1, 1-d1)/f1/2
     t_max = 16/f1
     
-    wf1, _ = waveform.make_step_waveform2(f1, d1, ph1, dt, t_max)
+    wf1, _ = wvf.make_step_waveform2(f1, d1, ph1, dt, t_max)
     fratio = np.exp(np.linspace(np.log(0.5), np.log(2), num_tests))
     
     rows = []
@@ -198,18 +198,18 @@ def test_ips(num_tests = 5):
         print(f"*** w2: f: {f2:0.3f}, d: {d2:0.3f}, ph: {ph2:0.3f} ***")
         print()
         
-        waveform.show_waveform(wf1, bit_depth = 16, lbl = "w1")
-        wf2, _ = waveform.make_step_waveform2(*w2, dt, t_max)
-        waveform.show_waveform(wf2, bit_depth = 16, lbl = "w2")
+        wvf.show_waveform(wf1, bit_depth = 16, lbl = "w1")
+        wf2, _ = wvf.make_step_waveform2(*w2, dt, t_max)
+        wvf.show_waveform(wf2, bit_depth = 16, lbl = "w2")
         
-        wfsum = waveform.sum_waveforms(wf1, wf2, thresh = 1.0)
-        waveform.show_waveform(wfsum, bit_depth = 16, lbl = "w1+w2")
-        wfdiff = waveform.diff_waveforms(wf1, wf2, rect = True)
-        waveform.show_waveform(wfdiff, bit_depth = 16, lbl = "w1-w2")
-        wfdiff2 = waveform.diff_waveforms(wf2, wf1, rect = True)
-        waveform.show_waveform(wfdiff2, bit_depth = 16, lbl = "w2-w1")
+        wfsum = wvf.sum_waveforms(wf1, wf2, thresh = 1.0)
+        wvf.show_waveform(wfsum, bit_depth = 16, lbl = "w1+w2")
+        wfdiff = wvf.diff_waveforms(wf1, wf2, rect = True)
+        wvf.show_waveform(wfdiff, bit_depth = 16, lbl = "w1-w2")
+        wfdiff2 = wvf.diff_waveforms(wf2, wf1, rect = True)
+        wvf.show_waveform(wfdiff2, bit_depth = 16, lbl = "w2-w1")
         
-        sc, _, _ = waveform.compare_waveforms(w, w2, dt = dt, t_max = t_max)
+        sc, _, _ = wvf.compare_waveforms(w, w2, dt = dt, t_max = t_max)
         
         # sc = sum([v1*v2 for v1,v2 in zip(wf1, wf2)]) / len(wf1)
         
@@ -250,62 +250,62 @@ def test_alg(num_tests = 5, show_spectrum = False):
         t_max = ns*dt
         
         print(f"*** w1: f: {f1:0.3f}, d: {d1:0.3f}, ph: {ph1:0.3f} ***")
-        wf1, _ = waveform.make_step_waveform2(f1, d1, ph1, dt, t_max)
-        waveform.show_waveform(wf1, bit_depth = 16, lbl = "w1")
+        wf1, _ = wvf.make_step_waveform2(f1, d1, ph1, dt, t_max)
+        wvf.show_waveform(wf1, bit_depth = 16, lbl = "w1")
         
         print(f"*** w2: f: {f2:0.3f}, d: {d2:0.3f}, ph: {ph2:0.3f} ***")
-        wf2, _ = waveform.make_step_waveform2(*w2, dt, t_max)
-        waveform.show_waveform(wf2, bit_depth = 16, lbl = "w2")
+        wf2, _ = wvf.make_step_waveform2(*w2, dt, t_max)
+        wvf.show_waveform(wf2, bit_depth = 16, lbl = "w2")
         
-        wfsum = waveform.sum_waveforms(wf1, wf2, thresh = 1.0)
-        waveform.show_waveform(wfsum, bit_depth = 16, lbl = "w1+w2")
-        wres1 = waveform.extract_waveform_info(wfsum, dt)
+        wfsum = wvf.sum_waveforms(wf1, wf2, thresh = 1.0)
+        wvf.show_waveform(wfsum, bit_depth = 16, lbl = "w1+w2")
+        wres1 = wvf.extract_waveform_info(wfsum, dt)
         
-        wfres1, _ = waveform.make_step_waveform2(*wres1, dt, t_max)
+        wfres1, _ = wvf.make_step_waveform2(*wres1, dt, t_max)
         if any(wfres1):
-            waveform.show_waveform(wfres1, bit_depth = 16, lbl="w1+w2?")
+            wvf.show_waveform(wfres1, bit_depth = 16, lbl="w1+w2?")
         else:
             print("no wfres1 :(")
             
-        wfdiff = waveform.diff_waveforms(wf1, wf2, rect = True)
-        waveform.show_waveform(wfdiff, bit_depth = 16, lbl = "w1-w2")
-        wres2 = waveform.extract_waveform_info(wfdiff, dt)
+        wfdiff = wvf.diff_waveforms(wf1, wf2, rect = True)
+        wvf.show_waveform(wfdiff, bit_depth = 16, lbl = "w1-w2")
+        wres2 = wvf.extract_waveform_info(wfdiff, dt)
         
-        wfres2, _ = waveform.make_step_waveform2(*wres2, dt, t_max)
+        wfres2, _ = wvf.make_step_waveform2(*wres2, dt, t_max)
         if any(wfres2):
-            waveform.show_waveform(wfres2, bit_depth = 16, lbl="w1-w2?")
+            wvf.show_waveform(wfres2, bit_depth = 16, lbl="w1-w2?")
         else:
             print("no wfres2 :(")
         
-        wfdiff2 = waveform.diff_waveforms(wf2, wf1, rect = True)
-        waveform.show_waveform(wfdiff2, bit_depth = 16, lbl = "w2-w1")
-        wres3 = waveform.extract_waveform_info(wfdiff2, dt)
+        wfdiff2 = wvf.diff_waveforms(wf2, wf1, rect = True)
+        wvf.show_waveform(wfdiff2, bit_depth = 16, lbl = "w2-w1")
+        wres3 = wvf.extract_waveform_info(wfdiff2, dt)
         
-        wfres3, _ = waveform.make_step_waveform2(*wres3, dt, t_max)
+        wfres3, _ = wvf.make_step_waveform2(*wres3, dt, t_max)
         if any(wfres3):
-            waveform.show_waveform(wfres3, bit_depth = 16, lbl="w2-w1?")
+            wvf.show_waveform(wfres3, bit_depth = 16, lbl="w2-w1?")
         else:
             print("no wfres1 :(")
         
         if show_spectrum:
             print("w1 spectrum")
-            waveform.show_ft(wf1, polar = True)
+            wvf.show_ft(wf1, polar = True)
             print()
             
             print("w2 spectrum")
-            waveform.show_ft(wf2, polar = True)
+            wvf.show_ft(wf2, polar = True)
             print()
             
             print("w1+w2 spectrum")
-            waveform.show_ft(wfsum, polar = True)
+            wvf.show_ft(wfsum, polar = True)
             print()
             
             print("w1-w2 spectrum")
-            waveform.show_ft(wfdiff, polar = True)
+            wvf.show_ft(wfdiff, polar = True)
             print()
             
             print("w2-w1 spectrum")
-            waveform.show_ft(wfdiff2, polar = True)
+            wvf.show_ft(wfdiff2, polar = True)
             print()
             
         wf_direct_sum = [a+b for a, b in zip(w1, w2)]
@@ -321,7 +321,7 @@ def test_alg(num_tests = 5, show_spectrum = False):
         print(tabulate(wf_data, headers = wf_headers))
         print()
         
-        sc, _, _ = waveform.compare_waveforms(w1, w2, dt = dt, t_max = t_max)
+        sc, _, _ = wvf.compare_waveforms(w1, w2, dt = dt, t_max = t_max)
         
         sc_scaled = sc / max(d1, d2)
         print(f"Score = {sc:0.1%}")
@@ -363,11 +363,11 @@ def test_time_res():
     dt = tmin
     t_max = tmax * nc
     
-    wf1, _dt = waveform.make_step_waveform2(f1, d1, ph1, dt, t_max)
-    wf2, _dt = waveform.make_step_waveform2(f2, d2, ph2, dt, t_max)
+    wf1, _dt = wvf.make_step_waveform2(f1, d1, ph1, dt, t_max)
+    wf2, _dt = wvf.make_step_waveform2(f2, d2, ph2, dt, t_max)
     
-    waveform.show_waveform(wf1)
-    waveform.show_waveform(wf2)
+    wvf.show_waveform(wf1)
+    wvf.show_waveform(wf2)
 
         
 def main():
